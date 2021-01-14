@@ -1,0 +1,2 @@
+# Coyote
+ WIP - mIRC Script
