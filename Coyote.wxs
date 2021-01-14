@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+	<Product Name='Coyote' Id='d571e707-f37f-42f0-be9b-a79c2d46aebb' UpgradeCode='f4314022-71fe-4aea-a5e3-b0ceb1c70657' Language='1033' Codepage='utf-8' Version='1.00' Manufacturer='acvxqs'>
+	<Package Id='*' Keywords='Installer' Description="Coyote mIRC Script Installer" Comments='Coyote' Manufacturer='acvxqs' InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+	<Property Id="MIRC">
+		<RegistrySearch 
+			Id="MLOC"
+			Root="HKLM"
+			Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\mIRC"
+			Name="InstallLocation"
+			Type="raw" />
+	</Property>
+	
+	<Property Id="MIRCVERSION">
+	    <DirectorySearch Id="MIRCFOLDER" Path="[MIRC]">
+	        <FileSearch Name="mirc.exe" MinVersion="7.63.0.0"/>
+	    </DirectorySearch>
+	</Property>
+
+	<Condition Message="This application requires mIRC. Please install mIRC then run this installer again.">
+		<![CDATA[Installed OR MIRC]]>
+	</Condition>
+
+	<Condition Message="mirc.exe should be at least 7.64. Please install mIRC 7.64 then run this installer again.">
+	    <![CDATA[Installed OR MIRCVERSION]]>
+	</Condition>
+
+	<Media Id='1' Cabinet='Main.cab' EmbedCab='yes' CompressionLevel='high' DiskPrompt="CD-ROM #1" />
+    <Property Id='DiskPrompt' Value="Coyote Installation [1]" />
+	<!-- Step 1: Define the directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+       	<Directory Id="AppDataFolder">
+            <Directory Id="APPLICATIONROOTDIRECTORY" Name="Coyote">
+				<Directory Id="CONFIG" Name="config"/>
+				<Directory Id="SCRIPT" Name="script">
+					<Directory Id="IMG" Name="img"/>
+					<Directory Id="ADDONS" Name="addons"/>
+				</Directory>	
+			</Directory>
+		</Directory>
+    	<Directory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="Coyote"/>
+		</Directory>
+	</Directory>
+	<!-- Step 2: Add files to your installer package -->
+	<DirectoryRef Id="ApplicationProgramsFolder">
+		<Component Id="ApplicationShortcut" Guid="*">
+			<Shortcut Id="ApplicationStartMenuShortcut" 
+                Name="Coyote"
+                Target="[MIRC]\mirc.exe"
+                Arguments="-r&quot;%APPDATA%\Coyote&quot;"
+                WorkingDirectory="APPLICATIONROOTDIRECTORY"
+				Icon="coyote.ico">
+				<Icon Id="coyote.ico" SourceFile=".\script\img\coyote.ico"/>
+			</Shortcut>
+			<RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+			<RegistryValue Root="HKCU" Key="Software\acvxqs\Coyote" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+		</Component>
+	</DirectoryRef>
+	<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+		<Component Id='LICENSE' Guid='1b8e1f06-e411-468f-802e-235c16d738e7'>
+			<File Id='LICENSE' Name='LICENSE' DiskId='1' Source='.\LICENSE' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='LICENSE'
+            	Value="[APPLICATIONROOTDIRECTORY]"
+            	Type='string'
+             	KeyPath='yes' />
+            <RemoveFile Id='LICENSE' Name='LICENSE' On='uninstall'/>
+		</Component>
+		<Component Id='mirc.ini' Guid='d37ed362-db8c-4572-85f1-246fe2f26a8c'>
+			<File Id='mirc.ini' Name='mirc.ini' DiskId='1' Source='.\mirc.ini' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='mirc.ini'
+            	Value="[APPLICATIONROOTDIRECTORY]"
+            	Type='string'
+             	KeyPath='yes' />
+            <RemoveFolder Id='APPLICATIONROOTDIRECTORY' On='uninstall'/>
+		</Component>
+	</DirectoryRef>
+	<DirectoryRef Id="CONFIG">
+		<Component Id='p.ini' Guid='2ce260a6-dc61-4152-a05b-480f92623a2d'>
+			<File Id='p.ini' Name='p.ini' DiskId='1' Source='.\config\p.ini' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='p.ini'
+            	Value="[APPLICATIONROOTDIRECTORY]CONFIG\"
+            	Type='string'
+             	KeyPath='yes' />
+		</Component>
+		<Component Id='u.ini' Guid='4fba6bee-3209-44e3-80af-ff7225eb5dcf'>
+			<File Id='u.ini' Name='u.ini' DiskId='1' Source='.\config\u.ini' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='u.ini'
+            	Value="[APPLICATIONROOTDIRECTORY]CONFIG\"
+            	Type='string'
+             	KeyPath='yes' />
+		</Component>
+		<Component Id='v.ini' Guid='188c69d1-4aa4-40ab-8306-33b4874c9eea'>
+			<File Id='v.ini' Name='v.ini' DiskId='1' Source='.\config\v.ini' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='v.ini'
+            	Value="[APPLICATIONROOTDIRECTORY]CONFIG\"
+            	Type='string'
+             	KeyPath='yes' />
+            <RemoveFolder Id='CONFIG' On='uninstall'/>
+		</Component>
+	</DirectoryRef>
+	<DirectoryRef Id="SCRIPT">
+		<Component Id='first.mrc' Guid='9b4119fa-4fb9-40ac-b087-faa6e0356d34'>
+			<File Id='first.mrc' Name='first.mrc' DiskId='1' Source='.\script\first.mrc' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='first.mrc'
+            	Value="[APPLICATIONROOTDIRECTORY]SCRIPT\"
+            	Type='string'
+             	KeyPath='yes' />
+            <RemoveFolder Id='SCRIPT' On='uninstall'/>
+		</Component>
+	</DirectoryRef>
+	<DirectoryRef Id="IMG">
+		<Component Id='coyote.ico' Guid='af382893-4871-44a7-a655-d0e87bb52075'>
+			<File Id='coyote.ico' Name='coyote.ico' DiskId='1' Source='.\script\img\coyote.ico' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='coyote.ico'
+            	Value="[APPLICATIONROOTDIRECTORY]IMG\"
+            	Type='string'
+             	KeyPath='yes' />
+            <RemoveFolder Id='IMG' On='uninstall'/>
+		</Component>
+	</DirectoryRef>
+	<DirectoryRef Id="ADDONS">
+		<Component Id='extras.coy' Guid='e01bf707-5da3-4d1e-b48d-da634606c95e'>
+			<File Id='extras.coy' Name='extras.coy' DiskId='1' Source='.\script\addons\extras.coy' />
+			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
+            	Name='extras.coy'
+            	Value="[APPLICATIONROOTDIRECTORY]ADDONS\"
+            	Type='string'
+             	KeyPath='yes' />
+            <RemoveFolder Id='ADDONS' On='uninstall'/>
+		</Component>
+	</DirectoryRef>
+	<!-- Step 3: Tell WiX to install the files -->
+	<Feature Id="MainScript" Title="Main Script" Level="1">
+		<ComponentRef Id='ApplicationShortcut' />
+		<ComponentRef Id='LICENSE' />
+		<ComponentRef Id='mirc.ini' />
+		<ComponentRef Id='p.ini' />
+		<ComponentRef Id='u.ini' />
+		<ComponentRef Id='v.ini' />
+		<ComponentRef Id='first.mrc' />
+		<ComponentRef Id='coyote.ico' />
+		<ComponentRef Id='extras.coy' />
+	</Feature>
+
+	<Icon Id="icon.ico" SourceFile=".\script\img\coyote.ico"/>
+	<Property Id="ARPPRODUCTICON" Value="icon.ico" />
+		
+	</Product>
+</Wix>
