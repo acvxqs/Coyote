@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-	<Product Name='Coyote' Id='d571e707-f37f-42f0-be9b-a79c2d46aebb' UpgradeCode='f4314022-71fe-4aea-a5e3-b0ceb1c70657' Language='1033' Codepage='utf-8' Version='1.00' Manufacturer='acvxqs'>
+	<Product Name='Coyote' Id='f2f30e89-3df0-470a-ba11-f71e5f145cdc' UpgradeCode='f4314022-71fe-4aea-a5e3-b0ceb1c70657' Language='1033' Codepage='utf-8' Version='1.00' Manufacturer='acvxqs'>
 	<Package Id='*' Keywords='Installer' Description="Coyote mIRC Script Installer" Comments='Coyote' Manufacturer='acvxqs' InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
 	<Property Id="MIRC">
 		<RegistrySearch 
@@ -51,7 +51,7 @@
                 Arguments="-r&quot;%APPDATA%\Coyote&quot;"
                 WorkingDirectory="APPLICATIONROOTDIRECTORY"
 				Icon="coyote.ico">
-				<Icon Id="coyote.ico" SourceFile=".\script\img\coyote.ico"/>
+				<Icon Id="coyote.ico" SourceFile="..\script\img\coyote.ico"/>
 			</Shortcut>
 			<RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
 			<RegistryValue Root="HKCU" Key="Software\acvxqs\Coyote" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -59,7 +59,7 @@
 	</DirectoryRef>
 	<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
 		<Component Id='LICENSE' Guid='1b8e1f06-e411-468f-802e-235c16d738e7'>
-			<File Id='LICENSE' Name='LICENSE' DiskId='1' Source='.\LICENSE' />
+			<File Id='LICENSE' Name='LICENSE' DiskId='1' Source='..\LICENSE' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='LICENSE'
             	Value="[APPLICATIONROOTDIRECTORY]"
@@ -68,7 +68,7 @@
             <RemoveFile Id='LICENSE' Name='LICENSE' On='uninstall'/>
 		</Component>
 		<Component Id='mirc.ini' Guid='d37ed362-db8c-4572-85f1-246fe2f26a8c'>
-			<File Id='mirc.ini' Name='mirc.ini' DiskId='1' Source='.\mirc.ini' />
+			<File Id='mirc.ini' Name='mirc.ini' DiskId='1' Source='..\mirc.ini' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='mirc.ini'
             	Value="[APPLICATIONROOTDIRECTORY]"
@@ -79,7 +79,7 @@
 	</DirectoryRef>
 	<DirectoryRef Id="CONFIG">
 		<Component Id='p.ini' Guid='2ce260a6-dc61-4152-a05b-480f92623a2d'>
-			<File Id='p.ini' Name='p.ini' DiskId='1' Source='.\config\p.ini' />
+			<File Id='p.ini' Name='p.ini' DiskId='1' Source='..\config\p.ini' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='p.ini'
             	Value="[APPLICATIONROOTDIRECTORY]CONFIG\"
@@ -87,7 +87,7 @@
              	KeyPath='yes' />
 		</Component>
 		<Component Id='u.ini' Guid='4fba6bee-3209-44e3-80af-ff7225eb5dcf'>
-			<File Id='u.ini' Name='u.ini' DiskId='1' Source='.\config\u.ini' />
+			<File Id='u.ini' Name='u.ini' DiskId='1' Source='..\config\u.ini' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='u.ini'
             	Value="[APPLICATIONROOTDIRECTORY]CONFIG\"
@@ -95,7 +95,7 @@
              	KeyPath='yes' />
 		</Component>
 		<Component Id='v.ini' Guid='188c69d1-4aa4-40ab-8306-33b4874c9eea'>
-			<File Id='v.ini' Name='v.ini' DiskId='1' Source='.\config\v.ini' />
+			<File Id='v.ini' Name='v.ini' DiskId='1' Source='..\config\v.ini' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='v.ini'
             	Value="[APPLICATIONROOTDIRECTORY]CONFIG\"
@@ -106,7 +106,7 @@
 	</DirectoryRef>
 	<DirectoryRef Id="SCRIPT">
 		<Component Id='first.mrc' Guid='9b4119fa-4fb9-40ac-b087-faa6e0356d34'>
-			<File Id='first.mrc' Name='first.mrc' DiskId='1' Source='.\script\first.mrc' />
+			<File Id='first.mrc' Name='first.mrc' DiskId='1' Source='..\script\first.mrc' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='first.mrc'
             	Value="[APPLICATIONROOTDIRECTORY]SCRIPT\"
@@ -117,7 +117,7 @@
 	</DirectoryRef>
 	<DirectoryRef Id="IMG">
 		<Component Id='coyote.ico' Guid='af382893-4871-44a7-a655-d0e87bb52075'>
-			<File Id='coyote.ico' Name='coyote.ico' DiskId='1' Source='.\script\img\coyote.ico' />
+			<File Id='coyote.ico' Name='coyote.ico' DiskId='1' Source='..\script\img\coyote.ico' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='coyote.ico'
             	Value="[APPLICATIONROOTDIRECTORY]IMG\"
@@ -128,7 +128,7 @@
 	</DirectoryRef>
 	<DirectoryRef Id="ADDONS">
 		<Component Id='extras.coy' Guid='e01bf707-5da3-4d1e-b48d-da634606c95e'>
-			<File Id='extras.coy' Name='extras.coy' DiskId='1' Source='.\script\addons\extras.coy' />
+			<File Id='extras.coy' Name='extras.coy' DiskId='1' Source='..\script\addons\extras.coy' />
 			<RegistryValue Root='HKCU' Key='Software\acvxqs\Coyote'
             	Name='extras.coy'
             	Value="[APPLICATIONROOTDIRECTORY]ADDONS\"
@@ -150,7 +150,7 @@
 		<ComponentRef Id='extras.coy' />
 	</Feature>
 
-	<Icon Id="icon.ico" SourceFile=".\script\img\coyote.ico"/>
+	<Icon Id="icon.ico" SourceFile="..\script\img\coyote.ico"/>
 	<Property Id="ARPPRODUCTICON" Value="icon.ico" />
 		
 	</Product>
